@@ -1,1 +1,9 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.App{
+    background: rgb(0, 85, 193);
+    height: 100vh;
+}
