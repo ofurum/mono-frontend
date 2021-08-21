@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import powerBy from '../../assets/icons/poweredBy.svg'
 import Search from "../../assets/icons/search.svg";
 import "./description.scss";
 import axios from "axios";
@@ -8,26 +9,36 @@ const baseURL = "https://mono-backend-banks.herokuapp.com";
 const Description = () => {
   const [banks, setBank] = useState([]);
   const [searchBank, setSearchBank] = useState("")
-  const Toggle = i=>{
-    const newBanks = [...banks] 
-    newBanks.forEach(bank=> bank.open = false );
-    newBanks[i].open  =  newBanks[i].open ? false : true
+  const [isLoading, setLoading] =useState(true);
+
+  const Toggle = i =>{
+    let newBanks = [...banks] 
+    newBanks[i].open  =  !newBanks[i].open 
+    newBanks[i].close = !newBanks[i].close
+    newBanks = newBanks.map((bank, index) => {
+      if(index !== i) bank.open = false;
+      return bank;
+    })
     setBank(newBanks)
   }
 
   useEffect(() => {
     axios.get(`${baseURL}/banks?search=${searchBank}`).then((response) => {
-      //setBank(response.data);
-      const anime = response.data.map(lot=> ({...lot,open:false}))
-      setBank(anime)
-    });
+      console.log(response, 'resp')
+      const result = response.data.map(lot=> ({...lot,open:false}))
+      setLoading(result)
+      setBank(result)
+      if(!searchBank) console.log("bank not found")
+    })
   }, [searchBank]);
   
-  // useEffect(() => {
-  //   axios.get(`${baseURL}/banks?search=${searchBank}`)
-  // },[])
+
+  if(isLoading) {
+    <p>Loading ....</p>
+  }
 
   return (
+    <div className="des">
     <div className="description">
       <div className="access">
         <p>Give Floof access to your financial data</p>
@@ -49,6 +60,8 @@ const Description = () => {
           </div>
         </div>
       </div>
+      <img src={powerBy} alt="icon" className="img-power"/>
+    </div>
     </div>
   );
 };

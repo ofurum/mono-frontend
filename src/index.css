@@ -1,13 +1,29 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: "DuplicateSans", sans-serif;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+@font-face {
+
+  font-family: 'DuplicateSans';
+
+  src: local('DuplicateSans'),
+
+    url("./assets/fonts/DuplicateSans-Thin.ttf") format('truetype');
+
+}
+
+@font-face {
+
+  font-family: 'DuplicateSansBold';
+
+  src: local('DuplicateSans-Bold'),
+
+    url("./assets/fonts/DuplicateSans-Bold.ttf") format('truetype');
+
 }
